@@ -1,8 +1,8 @@
-//generate finite heightmaps with Perlin noise
+//generate finite heightmaps with layered Perlin noise
 //it's a bit slow. oh well
 
-function interpolate(a0, a1, w) {
-    return (a1 - a0) * (3.0 - w * 2.0) * w * w + a0;
+function interpolate(a0, a1, w) { //Stolen from Wikipedia!
+    return (a1 - a0) * (3 - w * 2) * w * w + a0;
 }
 
 function dotProduct(x, y, vec) {
