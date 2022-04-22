@@ -1,13 +1,10 @@
 //generate finite heightmaps with layered Perlin noise
 //it's a bit slow. oh well
 
-function interpolate(a0, a1, w) { //Stolen from Wikipedia!
-    return (a1 - a0) * (3 - w * 2) * w * w + a0;
-}
+//Stolen from Wikipedia!
+const interpolate = (a0, a1, w) => (a1 - a0) * (3 - w * 2) * w * w + a0;
 
-function dotProduct(x, y, vec) {
-    return x * vec.x + y * vec.y;
-}
+const dotProduct = (x, y, vec) => x * vec.x + y * vec.y;
 
 export default class PerlinMap {
     constructor(width, height) {

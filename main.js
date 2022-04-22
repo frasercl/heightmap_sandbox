@@ -13,23 +13,24 @@ const mod = (n, m) => (n + m) % m;
 const pythag = (a, b) => Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 const pointDist = (i, j) => pythag(i.x - j.x, i.y - j.y);
 
-function hueToChannel(h) {
-    h = mod(h, 1530);
-    if(h <= 255) return h;
-    if(h <= 765) return 255;
-    if(h <= 1020) return 255 - (h % 255);
-    return 0;
-}
+const ramp = [
+    [88, 19, 252],
+    [28, 194, 253],
+    [125, 253, 148],
+    [245, 201, 38],
+    [255, 43, 24]
+];
 
 function heightToColorData(height) {
     if(Math.abs(height * 8 % 1) > 0.97) {
         return [75, 75, 75];
     } else {
-        const hue = (height + 1) * 525;
-        const r = hueToChannel(hue - 510);
-        const g = hueToChannel(hue);
-        const b = hueToChannel(hue + 510);
-        return [r, g, b];
+        const val = Math.min((height + 1) / 2, 1);
+        const color = val * (ramp.length - 1);
+        const i = Math.min(Math.floor(color), ramp.length - 2);
+        const off = color % 1;
+        const getChan = chan => Math.floor(ramp[i][chan] * (1 - off) + ramp[i + 1][chan] * off);
+        return [getChan(0), getChan(1), getChan(2)];
     }
 }
 
