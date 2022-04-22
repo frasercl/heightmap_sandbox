@@ -1,11 +1,80 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
     <head>
         <title>heightmap sandbox</title>
+        <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+#desc-container {
+    position: absolute;
+    width: 45px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: width 0.5s, background-color 0.5s;
+}
+
+#desc-container:hover {
+    width: 22vw;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+#arrow {
+    opacity: 0.7;
+    float: right;
+    transition: transform 0.5s;
+}
+
+#desc-container:hover > #arrow {
+    transform: rotate(180deg);
+}
+
+#description {
+    font-family: 'Roboto', sans-serif;
+    color: #181818;
+    text-align: right;
+    float: right;
+    width: 20vw;
+    margin: 20px;
+    margin-right: 55px;
+    opacity: 0.0;
+    transition: margin-right 0.5s, opacity 0.5s;
+}
+
+#desc-container:hover > #description {
+    margin-right: 20px;
+    opacity: 1.0;
+}
+
+#regen {
+    font-weight: bold;
+    cursor: pointer;
+}
+        </style>
     </head>
     <body style="margin:0;overflow:hidden;">
-        <canvas></canvas>
+        <canvas style="position:absolute;"></canvas>
+        <div id="desc-container">
+            <svg id="arrow" xmlns="http://www.w3.org/2000/svg" width="35pt" height="35pt" version="1.1" viewBox="0 0 752 752">
+                <path d="m500.84 376-21.605-22.793-179.96-189.43-48.098 45.582 158.36 166.64-158.36 166.64 48.098 45.582 179.96-189.43 21.605-22.793z"/>
+            </svg>
+            <div id="description">
+                <p>
+                    This is a small experiment written in the weekend after I was given my main
+                    task at my internship, which ultimately led to the "Isochrone" tool in JPL's 
+                    MMGIS app. I figured an introductory exercise could also be an opportunity to
+                    experiment with a technique I'd been interested in for a while: terrain
+                    generation with Perlin noise. Red areas are high elevation, blue areas are low
+                    elevation. The purple shaded area roughly represents the area reachable from
+                    the center within some arbitrary constraint, based on an arbitrary cost
+                    function.
+                </p>
+                <p>
+                    It's not terribly fast, useful, or feature-rich. But I think it's neat.
+                </p>
+                <p id="regen">Click here to regenerate.</p>
+            </div>
+        </div>
     </body>
     <script type="module" src="./main.js"></script>
 </html>

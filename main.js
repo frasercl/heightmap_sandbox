@@ -191,4 +191,6 @@ function main() {
     ctx.stroke();
 }
 
+document.querySelector("#regen").addEventListener("click", main);
+
 main();
